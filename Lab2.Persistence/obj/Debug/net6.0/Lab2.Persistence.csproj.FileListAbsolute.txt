@@ -1,0 +1,17 @@
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\bin\Debug\net6.0\Lab2.Persistence.deps.json
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\bin\Debug\net6.0\Lab2.Persistence.runtimeconfig.json
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\bin\Debug\net6.0\Lab2.Persistence.dll
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\bin\Debug\net6.0\Lab2.Persistence.pdb
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\bin\Debug\net6.0\Lab2.Domain.dll
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\bin\Debug\net6.0\Lab2.Domain.pdb
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\obj\Debug\net6.0\Lab2.Persistence.csproj.AssemblyReference.cache
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\obj\Debug\net6.0\Lab2.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\obj\Debug\net6.0\Lab2.Persistence.AssemblyInfoInputs.cache
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\obj\Debug\net6.0\Lab2.Persistence.AssemblyInfo.cs
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\obj\Debug\net6.0\Lab2.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\obj\Debug\net6.0\Lab2.Persistence.csproj.CopyComplete
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\obj\Debug\net6.0\Lab2.Persistence.dll
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\obj\Debug\net6.0\refint\Lab2.Persistence.dll
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\obj\Debug\net6.0\Lab2.Persistence.pdb
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\obj\Debug\net6.0\Lab2.Persistence.genruntimeconfig.cache
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab2\Lab2\Lab2.Persistence\obj\Debug\net6.0\ref\Lab2.Persistence.dll
