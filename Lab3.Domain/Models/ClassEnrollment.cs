@@ -1,4 +1,7 @@
-﻿namespace Lab3.Domain.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Lab3.Domain.Models;
 
 public partial class ClassEnrollment
 {

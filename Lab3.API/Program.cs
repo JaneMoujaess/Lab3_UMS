@@ -1,17 +1,16 @@
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Lab3.Application.Middlewares;
-using Lab3.Application.Services.AdminService;
 using Lab3.Domain.Models;
 using Lab3.Infrastructure;
 using Lab3.Persistence;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,8 +27,15 @@ builder.Services.AddDbContext<UmsDbContext>(options =>
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
 
 //My services
-builder.Services.AddScoped<IFirebaseAuthService,FirebaseAuthService>();
+builder.Services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
 builder.Services.AddTransient<IAdminService, AdminService>();
+
+//Multitenancy
+/*builder.Services.AddScopedAs<TenantService>(new[] {
+    typeof(ITenantGetter),
+    typeof(ITenantSetter)
+});
+builder.Services.AddScoped<MultiTenantServiceMiddleware>();*/
 
 //Odata
 static IEdmModel GetEdmModel()
@@ -38,6 +44,7 @@ static IEdmModel GetEdmModel()
     builder.EntitySet<Course>("Courses");
     return builder.GetEdmModel();
 }
+
 builder.Services.AddControllers().AddOData(options => options
     .AddRouteComponents("odata", GetEdmModel())
     .Select()
@@ -50,7 +57,7 @@ builder.Services.AddControllers().AddOData(options => options
 
 
 //Firebase
-FirebaseApp.Create(new AppOptions()
+FirebaseApp.Create(new AppOptions
 {
     Credential = GoogleCredential.FromFile("./firebase-config.json")
 });
@@ -85,7 +92,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 
     options.OperationFilter<SecurityRequirementsOperationFilter>();
-});// UI for authorization in swagger
+}); // UI for authorization in swagger
 
 var app = builder.Build();
 

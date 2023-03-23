@@ -1869,6 +1869,7 @@
           "FirebaseAdmin": "2.3.0",
           "MediatR": "12.0.1",
           "Microsoft.EntityFrameworkCore": "7.0.3",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0-preview.2.23128.3",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "8.0.0-preview.2.23128.3",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3"
         },
@@ -6042,6 +6043,7 @@
       "Microsoft.EntityFrameworkCore >= 7.0.3",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.3",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.3",
+      "Microsoft.Extensions.DependencyInjection.Abstractions >= 8.0.0-preview.2.23128.3",
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 8.0.0-preview.2.23128.3",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.3"
     ]
@@ -6114,6 +6116,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[7.0.3, )"
+          },
+          "Microsoft.Extensions.DependencyInjection.Abstractions": {
+            "target": "Package",
+            "version": "[8.0.0-preview.2.23128.3, )"
           },
           "Microsoft.Extensions.Options.ConfigurationExtensions": {
             "target": "Package",

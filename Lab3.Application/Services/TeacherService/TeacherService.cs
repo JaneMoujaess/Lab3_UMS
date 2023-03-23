@@ -2,7 +2,7 @@
 
 namespace Lab3.Application.Services.TeacherService;
 
-public class TeacherService:ITeacherService
+public class TeacherService : ITeacherService
 {
     public Task<string> TeachCourse(Course course)
     {

@@ -1,6 +1,6 @@
 ﻿using Lab3.Domain.Models;
 
-namespace Lab3.Application.Services.AdminService;
+
 
 public interface IAdminService
 {

@@ -2,7 +2,7 @@
 
 namespace Lab3.Application.Services.StudentService;
 
-public class StudentService:IStudentService
+public class StudentService : IStudentService
 {
     public Task<string> EnrollInCourse(Course course)
     {

@@ -1,5 +1,4 @@
-﻿using Lab3.Application.Services.AdminService;
-using Lab3.Domain.Models;
+﻿using Lab3.Domain.Models;
 using MediatR;
 
 namespace Lab3.Application.Mediators.AdminMediator.AdminQueries;

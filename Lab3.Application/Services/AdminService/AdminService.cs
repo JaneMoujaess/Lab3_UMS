@@ -2,8 +2,6 @@
 using Lab3.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lab3.Application.Services.AdminService;
-
 public class AdminService : IAdminService
 {
     private readonly UmsDbContext _dbContext;

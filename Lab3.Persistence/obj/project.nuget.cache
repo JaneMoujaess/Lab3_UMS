@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "o2bag0FiBSdgftoBKiak/+RkstD4JAxIQ3X656VHTvHjI2byB6kXfNYrrQBFh2T8bY58S/RI63Trhw1duOye/A==",
+  "dgSpecHash": "HWp5nU02ElWbHPGsd2xSYLbCDSkhL2M5nPLgMYkVpHtSKXRxxqKCqgfm604DNlNA7GR2ptfU4hfQjfpxXyU5Ow==",
   "success": true,
   "projectFilePath": "C:\\Users\\USER\\Desktop\\Jane\\inmind\\Labs\\Lab3\\Lab3\\Lab3.Persistence\\Lab3.Persistence.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,8 @@
     "C:\\Users\\USER\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\mediatr\\12.0.1\\mediatr.12.0.1.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.0.0\\microsoft.bcl.asyncinterfaces.1.0.0.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.3\\microsoft.entityframeworkcore.7.0.3.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.3\\microsoft.entityframeworkcore.abstractions.7.0.3.nupkg.sha512",
