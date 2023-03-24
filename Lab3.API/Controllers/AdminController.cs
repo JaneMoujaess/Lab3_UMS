@@ -21,7 +21,7 @@ public class AdminController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public async Task<ActionResult<List<Course>>> CreateCourse(Course newCourse)
     {
         return Ok(await _mediator.Send(new CreateCourseCommand { newCourse = newCourse }));
@@ -29,7 +29,7 @@ public class AdminController : ControllerBase
 
     [HttpGet]
     [EnableQuery]
-    [Authorize(Roles = "teacher")]
+    [Authorize]
     public async Task<ActionResult<List<Course>>> GetAllCourses()
     {
         return Ok(await _mediator.Send(new GetAllCoursesQuery()));

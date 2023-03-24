@@ -7,3 +7,17 @@ public class CreateCourseCommand : IRequest<List<Course>>
 {
     public Course newCourse { set; get; }
 }
+
+public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand,List<Course>>
+{
+    private readonly IAdminService _adminService;
+
+    public CreateCourseCommandHandler(IAdminService adminService)
+    {
+        _adminService = adminService;
+        
+    }public async Task<List<Course>> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
+    {
+        return await _adminService.CreateCourse(request.newCourse);
+    }
+}

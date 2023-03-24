@@ -19,6 +19,8 @@ public class AdminService : IAdminService
 
     public async Task<List<Course>> CreateCourse(Course newCourse)
     {
+        var tenantId = _tenantProviderService.GetTenantId();
+        newCourse.BranchTenantId = tenantId;
         _dbContext.Courses.Add(newCourse);
         await _dbContext.SaveChangesAsync();
         return await _dbContext.Courses.ToListAsync();
