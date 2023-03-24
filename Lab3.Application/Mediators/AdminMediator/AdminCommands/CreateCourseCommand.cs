@@ -1,11 +1,12 @@
-﻿using Lab3.Domain.Models;
+﻿using Lab3.Application.DTOs;
+using Lab3.Domain.Models;
 using MediatR;
 
 namespace Lab3.Application.Mediators.AdminMediator.AdminCommands;
 
 public class CreateCourseCommand : IRequest<List<Course>>
 {
-    public Course newCourse { set; get; }
+    public CourseDTO newCourse { set; get; }
 }
 
 public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand,List<Course>>

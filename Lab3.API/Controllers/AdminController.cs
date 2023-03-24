@@ -1,4 +1,5 @@
-﻿using Lab3.Application.Mediators.AdminMediator.AdminCommands;
+﻿using Lab3.Application.DTOs;
+using Lab3.Application.Mediators.AdminMediator.AdminCommands;
 using Lab3.Application.Mediators.AdminMediator.AdminQueries;
 using Lab3.Domain.Models;
 using MediatR;
@@ -22,7 +23,7 @@ public class AdminController : ControllerBase
 
     [HttpPost]
     [Authorize(Roles = "admin")]
-    public async Task<ActionResult<List<Course>>> CreateCourse(Course newCourse)
+    public async Task<ActionResult<List<Course>>> CreateCourse(CourseDTO newCourse)
     {
         return Ok(await _mediator.Send(new CreateCourseCommand { newCourse = newCourse }));
     }
