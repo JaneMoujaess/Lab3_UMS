@@ -5,7 +5,9 @@ namespace Lab3.Domain.Models;
 
 public partial class BranchTenant
 {
-    public string Id { get; set; } = null!;
+    public long Id { get; set; }
 
     public string Location { get; set; } = null!;
+
+    public virtual ICollection<Course> Courses { get; } = new List<Course>();
 }

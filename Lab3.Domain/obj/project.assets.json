@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "dotenv.net/3.1.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/dotenv.net.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/dotenv.net.dll": {}
+        }
+      },
       "Firebase.Auth/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -1864,6 +1873,20 @@
     }
   },
   "libraries": {
+    "dotenv.net/3.1.2": {
+      "sha512": "lFm4hGX9JkNtAF36Uz4C3WT7MC6Ys802k0cPvlln8ydmH67GQjnToH+w645tQm1czAjW/V6tPE088lD77sYFGA==",
+      "type": "package",
+      "path": "dotenv.net/3.1.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dotenv.net.3.1.2.nupkg.sha512",
+        "dotenv.net.nuspec",
+        "lib/netstandard1.6/dotenv.net.dll",
+        "lib/netstandard2.0/dotenv.net.dll",
+        "lib/netstandard2.1/dotenv.net.dll"
+      ]
+    },
     "Firebase.Auth/1.0.0": {
       "sha512": "MRAGIRDXqB0jRvtJx0yRmTMjZInQcUSyHN7LuOwxL/nfyceDEA+Gfiimn7HtI2ntHw3hdUAoeeCA6BCc3qg0/A==",
       "type": "package",
@@ -6020,7 +6043,8 @@
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.3",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 8.0.0-preview.2.23128.3",
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 8.0.0-preview.2.23128.3",
-      "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.3"
+      "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.3",
+      "dotenv.net >= 3.1.2"
     ]
   },
   "packageFolders": {
@@ -6099,6 +6123,10 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
             "version": "[7.0.3, )"
+          },
+          "dotenv.net": {
+            "target": "Package",
+            "version": "[3.1.2, )"
           }
         },
         "imports": [

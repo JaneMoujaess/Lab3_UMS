@@ -1,16 +1,20 @@
 ﻿using Firebase.Auth;
-using FirebaseAdmin.Auth;
+using Microsoft.Extensions.Logging;
 using FirebaseAuth = FirebaseAdmin.Auth.FirebaseAuth;
 namespace Lab3.Infrastructure;
 
 public class FirebaseAuthService : IFirebaseAuthService
 {
+    //private static readonly string WebApiKey = Environment.GetEnvironmentVariable("FIREBASE_API_KEY");
+    private readonly ILogger<FirebaseAuthService> _logger;
     private const string WebApiKey = "AIzaSyB-3k-P8GazZPxVjMMGFEGjJ2tNqU6jITM";
-
+    
     private readonly FirebaseAuthProvider _auth;
 
-    public FirebaseAuthService()
+    public FirebaseAuthService(ILogger<FirebaseAuthService> logger)
     {
+        _logger = logger;
+        //_logger.LogInformation(WebApiKey);
         _auth = new FirebaseAuthProvider(new FirebaseConfig(WebApiKey));
     }
 
@@ -23,13 +27,14 @@ public class FirebaseAuthService : IFirebaseAuthService
         return token;
     }
 
-    public async Task<string> SignUp(string email,string password)
+    public async Task<string> SignUp(string email,string password,string role,int branchTenantId)
     {
         var user = await _auth.CreateUserWithEmailAndPasswordAsync(email, password);
         
         Dictionary<string, object> customClaims = new Dictionary<string, object>
         {
-            {"role", "teacher"}
+            {"role", role},
+            {"branchTenantId",branchTenantId}
         };
         
         FirebaseAuth auth = FirebaseAuth.DefaultInstance;

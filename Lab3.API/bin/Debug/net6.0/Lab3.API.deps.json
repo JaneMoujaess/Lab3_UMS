@@ -25,10 +25,19 @@
           "Microsoft.OData.Edm": "7.15.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3",
           "Swashbuckle.AspNetCore": "6.2.3",
-          "Swashbuckle.AspNetCore.Filters": "7.0.6"
+          "Swashbuckle.AspNetCore.Filters": "7.0.6",
+          "dotenv.net": "3.1.2"
         },
         "runtime": {
           "Lab3.API.dll": {}
+        }
+      },
+      "dotenv.net/3.1.2": {
+        "runtime": {
+          "lib/netstandard2.1/dotenv.net.dll": {
+            "assemblyVersion": "3.1.2.0",
+            "fileVersion": "3.1.2.0"
+          }
         }
       },
       "Firebase.Auth/1.0.0": {
@@ -1329,7 +1338,9 @@
           "Microsoft.EntityFrameworkCore": "7.0.3",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0-preview.2.23128.3",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "8.0.0-preview.2.23128.3",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3",
+          "System.IdentityModel.Tokens.Jwt": "6.10.0",
+          "dotenv.net": "3.1.2"
         },
         "runtime": {
           "Lab3.Application.dll": {}
@@ -1343,7 +1354,8 @@
           "Microsoft.EntityFrameworkCore": "7.0.3",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0-preview.2.23128.3",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "8.0.0-preview.2.23128.3",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3",
+          "dotenv.net": "3.1.2"
         },
         "runtime": {
           "Lab3.Domain.dll": {}
@@ -1358,7 +1370,8 @@
           "Microsoft.EntityFrameworkCore": "7.0.3",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0-preview.2.23128.3",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "8.0.0-preview.2.23128.3",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3",
+          "dotenv.net": "3.1.2"
         },
         "runtime": {
           "Lab3.Infrastructure.dll": {}
@@ -1374,7 +1387,8 @@
           "Microsoft.EntityFrameworkCore": "7.0.3",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0-preview.2.23128.3",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "8.0.0-preview.2.23128.3",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3",
+          "dotenv.net": "3.1.2"
         },
         "runtime": {
           "Lab3.Persistence.dll": {}
@@ -1387,6 +1401,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "dotenv.net/3.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lFm4hGX9JkNtAF36Uz4C3WT7MC6Ys802k0cPvlln8ydmH67GQjnToH+w645tQm1czAjW/V6tPE088lD77sYFGA==",
+      "path": "dotenv.net/3.1.2",
+      "hashPath": "dotenv.net.3.1.2.nupkg.sha512"
     },
     "Firebase.Auth/1.0.0": {
       "type": "package",

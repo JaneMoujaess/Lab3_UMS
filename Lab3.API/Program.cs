@@ -1,8 +1,9 @@
-using System.Security.Claims;
+using dotenv.net;
 using FirebaseAdmin;
-using FirebaseAdmin.Auth;
 using Google.Apis.Auth.OAuth2;
 using Lab3.Application.Middlewares;
+using Lab3.Application.Services.AdminService;
+using Lab3.Application.Services.TenantProviderService;
 using Lab3.Domain.Models;
 using Lab3.Infrastructure;
 using Lab3.Persistence;
@@ -17,7 +18,12 @@ using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Loading environmental variables
+//DotEnv.Load();
+
 // Add services to the container.
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
 //DBcontext
 builder.Services.AddDbContext<UmsDbContext>(options =>
@@ -31,6 +37,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.
 //My services
 builder.Services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
 builder.Services.AddTransient<IAdminService, AdminService>();
+builder.Services.AddScoped<ITenantProviderService, TenantProviderService>();
 
 //Odata
 static IEdmModel GetEdmModel()
@@ -101,6 +108,7 @@ if (app.Environment.IsDevelopment())
 
 //My middlewares
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseMiddleware<TenantMiddleware>();
 
 app.UseHttpsRedirection();
 

@@ -40,7 +40,7 @@ public partial class UmsDbContext : DbContext
     {
         modelBuilder.Entity<BranchTenant>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("Branches_Tenants_pkey");
+            entity.HasKey(e => e.Id).HasName("BranchTenant_pkey");
 
             entity.ToTable("BranchTenant");
         });
@@ -74,6 +74,15 @@ public partial class UmsDbContext : DbContext
             entity.HasIndex(e => e.Name, "courses_\"name\"_uindex").IsUnique();
 
             entity.HasIndex(e => e.Id, "courses_id_uindex").IsUnique();
+
+            entity.HasIndex(e => e.BranchTenantId, "fki_b");
+
+            entity.Property(e => e.BranchTenantId).ValueGeneratedOnAdd();
+
+            entity.HasOne(d => d.BranchTenant).WithMany(p => p.Courses)
+                .HasForeignKey(d => d.BranchTenantId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("courses_branch_tenant_id_fk");
         });
 
         modelBuilder.Entity<Role>(entity =>

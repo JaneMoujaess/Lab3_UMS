@@ -25,8 +25,8 @@ public class AuthenticationController : ControllerBase
 
     [HttpPost("signup")]
     [AllowAnonymous]
-    public async Task<ActionResult> SignUp(string email, string password)
+    public async Task<ActionResult> SignUp(string email, string password,string role,int branchTenantId)
     {
-        return Ok(await _firebaseAuthService.SignUp(email,password));
+        return Ok(await _firebaseAuthService.SignUp(email,password,role,branchTenantId));
     }
 }

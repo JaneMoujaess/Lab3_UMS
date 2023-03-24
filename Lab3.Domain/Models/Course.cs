@@ -14,5 +14,9 @@ public partial class Course
 
     public NpgsqlRange<DateOnly>? EnrolmentDateRange { get; set; }
 
+    public long BranchTenantId { get; set; }
+
+    public virtual BranchTenant BranchTenant { get; set; } = null!;
+
     public virtual ICollection<TeacherPerCourse> TeacherPerCourses { get; } = new List<TeacherPerCourse>();
 }

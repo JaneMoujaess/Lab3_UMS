@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "HWp5nU02ElWbHPGsd2xSYLbCDSkhL2M5nPLgMYkVpHtSKXRxxqKCqgfm604DNlNA7GR2ptfU4hfQjfpxXyU5Ow==",
+  "dgSpecHash": "1awb/DXBU6ObrrUr6WVF64ABSZYltZs/9vuEQozqypgaqi0v0novNvQJ9m0ITdj2Q9UD5tjS+kQprcB9+3BRmw==",
   "success": true,
   "projectFilePath": "C:\\Users\\USER\\Desktop\\Jane\\inmind\\Labs\\Lab3\\Lab3\\Lab3.Persistence\\Lab3.Persistence.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\USER\\.nuget\\packages\\dotenv.net\\3.1.2\\dotenv.net.3.1.2.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\firebase.auth\\1.0.0\\firebase.auth.1.0.0.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\firebaseadmin\\2.3.0\\firebaseadmin.2.3.0.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\google.api.gax\\3.2.0\\google.api.gax.3.2.0.nupkg.sha512",

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Vk5XKdXlBtYDME3ogE5fsEgyFTg39Wpc4RQL2Ayxd1a+7LgZvWpxOOIjqDGc4eKcQ2jQ1cnVvUlTs0u76A7HhA==",
+  "dgSpecHash": "2MIS76009Ah22llAu1GoFW9MC25BBNjwZERRKivdWMKdVFPKw9//EBCCq5rSCJufwyJy18/6Fk46fsE0UBaSxg==",
   "success": true,
   "projectFilePath": "C:\\Users\\USER\\Desktop\\Jane\\inmind\\Labs\\Lab3\\Lab3\\Lab3.Common\\Lab3.Common.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\USER\\.nuget\\packages\\dotenv.net\\3.1.2\\dotenv.net.3.1.2.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\firebase.auth\\1.0.0\\firebase.auth.1.0.0.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\firebaseadmin\\2.3.0\\firebaseadmin.2.3.0.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\google.api.gax\\3.2.0\\google.api.gax.3.2.0.nupkg.sha512",

@@ -86,3 +86,4 @@ C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.API\obj\Debug\net6.0\refin
 C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.API\obj\Debug\net6.0\Lab3.API.pdb
 C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.API\obj\Debug\net6.0\Lab3.API.genruntimeconfig.cache
 C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.API\obj\Debug\net6.0\ref\Lab3.API.dll
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.API\bin\Debug\net6.0\dotenv.net.dll
