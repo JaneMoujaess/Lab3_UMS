@@ -1,5 +1,6 @@
 ﻿using Firebase.Auth;
-
+using FirebaseAdmin.Auth;
+using FirebaseAuth = FirebaseAdmin.Auth.FirebaseAuth;
 namespace Lab3.Infrastructure;
 
 public class FirebaseAuthService : IFirebaseAuthService
@@ -22,14 +23,23 @@ public class FirebaseAuthService : IFirebaseAuthService
         return token;
     }
 
-    public async Task<string> SignUp(string email, string password)
+    public async Task<string> SignUp(string email,string password)
     {
-        //create the user
-        await _auth.CreateUserWithEmailAndPasswordAsync(email, password);
-        //log in the new user
-        var fbAuthLink = await _auth
+        var user = await _auth.CreateUserWithEmailAndPasswordAsync(email, password);
+        
+        Dictionary<string, object> customClaims = new Dictionary<string, object>
+        {
+            {"role", "teacher"}
+        };
+        
+        FirebaseAuth auth = FirebaseAuth.DefaultInstance;
+        
+        FirebaseAdmin.Auth.UserRecord userRecord = await auth.GetUserByEmailAsync(email);
+        string uid = userRecord.Uid;
+        await auth.SetCustomUserClaimsAsync(uid, customClaims);
+
+        var fbLink=await _auth
             .SignInWithEmailAndPasswordAsync(email, password);
-        var token = fbAuthLink.FirebaseToken;
-        return token;
+        return fbLink.FirebaseToken;
     }
 }

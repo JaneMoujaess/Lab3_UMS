@@ -1,4 +1,6 @@
+using System.Security.Claims;
 using FirebaseAdmin;
+using FirebaseAdmin.Auth;
 using Google.Apis.Auth.OAuth2;
 using Lab3.Application.Middlewares;
 using Lab3.Domain.Models;
@@ -29,13 +31,6 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.
 //My services
 builder.Services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
 builder.Services.AddTransient<IAdminService, AdminService>();
-
-//Multitenancy
-/*builder.Services.AddScopedAs<TenantService>(new[] {
-    typeof(ITenantGetter),
-    typeof(ITenantSetter)
-});
-builder.Services.AddScoped<MultiTenantServiceMiddleware>();*/
 
 //Odata
 static IEdmModel GetEdmModel()
@@ -68,6 +63,7 @@ builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+        
         options.Authority = "https://securetoken.google.com/lab2-7a5dd";
         options.TokenValidationParameters = new TokenValidationParameters
         {

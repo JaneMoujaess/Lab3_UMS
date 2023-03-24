@@ -20,8 +20,7 @@ public class AdminController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize] //(Role.Admin) to restrict access to users who've been already authenticated and have a role of Admin => custom authorization
-    //Though, I have to find a way to perhaps pass a jwt token to ensure authorization thus enabling the method.
+    [Authorize]
     public async Task<ActionResult<List<Course>>> CreateCourse(Course newCourse)
     {
         return Ok(await _mediator.Send(new CreateCourseCommand { newCourse = newCourse }));
@@ -29,7 +28,7 @@ public class AdminController : ControllerBase
 
     [HttpGet]
     [EnableQuery]
-    [Authorize]
+    [Authorize(Roles = "teacher")]
     public async Task<ActionResult<List<Course>>> GetAllCourses()
     {
         return Ok(await _mediator.Send(new GetAllCoursesQuery()));
