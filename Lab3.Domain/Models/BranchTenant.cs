@@ -10,4 +10,6 @@ public partial class BranchTenant
     public string Location { get; set; } = null!;
 
     public virtual ICollection<Course> Courses { get; } = new List<Course>();
+
+    public virtual ICollection<User> Users { get; } = new List<User>();
 }

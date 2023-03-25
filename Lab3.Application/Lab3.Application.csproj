@@ -28,7 +28,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Mediators\StudentMediator\StudentQueries" />
         <Folder Include="Mediators\TeacherMediator\TeacherCommands" />
         <Folder Include="Mediators\TeacherMediator\TeacherQueries" />
     </ItemGroup>

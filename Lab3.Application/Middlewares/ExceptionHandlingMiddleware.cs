@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Firebase.Auth;
+using Lab3.Persistence.Exceptions;
 using Microsoft.AspNetCore.Http;
 
 namespace Lab3.Application.Middlewares;
@@ -19,12 +20,11 @@ public class ExceptionHandlingMiddleware
         {
             await _next(context);
         }
-        /*catch (MyCustomException ex)
+        catch (ClassNotFoundException ex)
         {
-            // Handle the custom exception
-            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
             await context.Response.WriteAsync(ex.Message);
-        }*/
+        }
         catch (FirebaseAuthException ex)
         {
             // Handle the Firebase exception

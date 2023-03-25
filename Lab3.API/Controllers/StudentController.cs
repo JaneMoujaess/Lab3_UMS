@@ -1,5 +1,28 @@
-﻿namespace Lab3.API.Controllers;
+﻿using Lab3.Application.DTOs;
+using Lab3.Application.Mediators.AdminMediator.AdminCommands;
+using Lab3.Application.Mediators.StudentMediator;
+using Lab3.Domain.Models;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-public class StudentController
+namespace Lab3.API.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class StudentController:ControllerBase
 {
+    private readonly IMediator _mediator;
+
+    public StudentController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+    
+    [HttpPost("Enroll")]
+    [Authorize(Roles = "student")]
+    public async Task<ActionResult<List<Course>>> EnrollInCourse(int classId)
+    {
+        return Ok(await _mediator.Send(new EnrollInCourseCommand() { classId = classId }));
+    }
 }

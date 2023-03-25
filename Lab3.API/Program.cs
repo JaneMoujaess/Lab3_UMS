@@ -4,6 +4,7 @@ using Google.Apis.Auth.OAuth2;
 using Lab3.Application.Middlewares;
 using Lab3.Application.Services.AdminService;
 using Lab3.Application.Services.CourseService;
+using Lab3.Application.Services.StudentService;
 using Lab3.Application.Services.TenantProviderService;
 using Lab3.Domain.Models;
 using Lab3.Infrastructure;
@@ -39,6 +40,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.
 //My services
 builder.Services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
 builder.Services.AddTransient<IAdminService, AdminService>();
+builder.Services.AddTransient<IStudentService, StudentService>();
 builder.Services.AddScoped<ITenantProviderService, TenantProviderService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
 

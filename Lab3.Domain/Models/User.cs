@@ -15,6 +15,10 @@ public partial class User
 
     public string Email { get; set; } = null!;
 
+    public long BranchTenantId { get; set; }
+
+    public virtual BranchTenant BranchTenant { get; set; } = null!;
+
     public virtual ICollection<ClassEnrollment> ClassEnrollments { get; } = new List<ClassEnrollment>();
 
     public virtual Role Role { get; set; } = null!;

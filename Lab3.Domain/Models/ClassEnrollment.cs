@@ -14,4 +14,10 @@ public partial class ClassEnrollment
     public virtual TeacherPerCourse Class { get; set; } = null!;
 
     public virtual User Student { get; set; } = null!;
+
+    public ClassEnrollment(long classId, long studentId)
+    {
+        ClassId = classId;
+        StudentId = studentId;
+    }
 }

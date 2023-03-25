@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Lab3.Domain.Models;
+﻿using Lab3.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lab3.Persistence;
@@ -156,6 +154,8 @@ public partial class UmsDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("users_pk");
 
+            entity.HasIndex(e => e.BranchTenantId, "fki_users_branch_tenant_id_fk");
+
             entity.HasIndex(e => e.Email, "users_\"email\"_uindex").IsUnique();
 
             entity.HasIndex(e => e.Id, "users_\"id\"_uindex").IsUnique();
@@ -163,8 +163,14 @@ public partial class UmsDbContext : DbContext
             entity.HasIndex(e => e.KeycloakId, "users_\"keycloackid\"_uindex").IsUnique();
 
             entity.Property(e => e.Id).HasDefaultValueSql("nextval('\"Users_id_seq\"'::regclass)");
+            entity.Property(e => e.BranchTenantId).ValueGeneratedOnAdd();
             entity.Property(e => e.Name).HasColumnType("character varying");
             entity.Property(e => e.RoleId).ValueGeneratedOnAdd();
+
+            entity.HasOne(d => d.BranchTenant).WithMany(p => p.Users)
+                .HasForeignKey(d => d.BranchTenantId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("users_branch_tenant_id_fk");
 
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)

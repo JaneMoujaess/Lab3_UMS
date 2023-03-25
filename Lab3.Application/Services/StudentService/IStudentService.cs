@@ -4,5 +4,5 @@ namespace Lab3.Application.Services.StudentService;
 
 public interface IStudentService
 {
-    public Task<string> EnrollInCourse(Course course);
+    public Task<string> EnrollInClass(int classId);
 }
