@@ -24,7 +24,8 @@ public class AdminService : IAdminService
         });
         _mapper = new Mapper(config);
     }
-
+    
+    //Implementation using entity
     /*public async Task<List<Course>> CreateCourse(Course newCourse)
     {
         var tenantId = _tenantProviderService.GetTenantId();
@@ -34,6 +35,8 @@ public class AdminService : IAdminService
         return await _dbContext.Courses.ToListAsync();
     }*/
     
+    
+    //Implementation using DTO to avoid circular references and to expose only required information and details
     public async Task<List<Course>> CreateCourse(CourseDTO newCourse)
     {
         var tenantId = _tenantProviderService.GetTenantId();
@@ -42,14 +45,5 @@ public class AdminService : IAdminService
         _dbContext.Courses.Add(course);
         await _dbContext.SaveChangesAsync();
         return await _dbContext.Courses.ToListAsync();
-    }
-
-    public async Task<List<Course>> GetAllCourses()
-    {
-        var tenantId = _tenantProviderService.GetTenantId();
- 
-        return await _dbContext.Courses
-            .Where(e => e.BranchTenantId == tenantId)
-            .ToListAsync();
     }
 }

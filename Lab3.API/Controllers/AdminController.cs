@@ -1,6 +1,6 @@
 ﻿using Lab3.Application.DTOs;
 using Lab3.Application.Mediators.AdminMediator.AdminCommands;
-using Lab3.Application.Mediators.AdminMediator.AdminQueries;
+using Lab3.Application.Mediators.CourseMediator;
 using Lab3.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -27,22 +27,4 @@ public class AdminController : ControllerBase
     {
         return Ok(await _mediator.Send(new CreateCourseCommand { newCourse = newCourse }));
     }
-
-    [HttpGet]
-    [EnableQuery]
-    [Authorize]
-    public async Task<ActionResult<List<Course>>> GetAllCourses()
-    {
-        return Ok(await _mediator.Send(new GetAllCoursesQuery()));
-    }
-
-    /*[HttpGet]
-    [EnableQuery]
-    public async Task<ActionResult<List<Course>>> GetAllCourses()
-    {
-        return Ok(await _mediator.Send(new GetOdataQuery()
-        {
-            Type = typeof(Course)
-        }));
-    }*/
 }
