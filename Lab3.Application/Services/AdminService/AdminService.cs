@@ -4,6 +4,8 @@ using Lab3.Application.Services.TenantProviderService;
 using Lab3.Domain.Models;
 using Lab3.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using NpgsqlTypes;
 
 namespace Lab3.Application.Services.AdminService;
 
@@ -12,9 +14,11 @@ public class AdminService : IAdminService
     private readonly UmsDbContext _dbContext;
     private readonly ITenantProviderService _tenantProviderService;
     private readonly IMapper _mapper;
-    
-    public AdminService(UmsDbContext dbContext,ITenantProviderService tenantProviderService)
+    private readonly ILogger<AdminService> _logger;
+
+    public AdminService(UmsDbContext dbContext,ITenantProviderService tenantProviderService,ILogger<AdminService> logger)
     {
+        _logger = logger;
         _dbContext = dbContext;
         _tenantProviderService = tenantProviderService;
         

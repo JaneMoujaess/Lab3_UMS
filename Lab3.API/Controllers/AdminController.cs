@@ -21,7 +21,7 @@ public class AdminController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost]
+    [HttpPost("CreateCourse")]
     [Authorize(Roles = "admin")]
     public async Task<ActionResult<List<Course>>> CreateCourse(CourseDTO newCourse)
     {

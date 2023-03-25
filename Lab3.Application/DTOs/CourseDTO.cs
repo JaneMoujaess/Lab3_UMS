@@ -7,8 +7,14 @@ public class CourseDTO
     public string? Name { get; set; }
 
     public int? MaxStudentsNumber { get; set; }
+    public Date StartEnrollment { get; set; }
+    public Date EndEnrollment { get; set; }
+    
+}
 
-    public NpgsqlRange<DateOnly>? EnrolmentDateRange { get; set; }
-
-    //public long BranchTenantId { get; set; }
+public class Date
+{
+    public int Year { get; set; }
+    public int Month { get; set; }
+    public int Day { get; set; }
 }
