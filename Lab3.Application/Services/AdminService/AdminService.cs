@@ -1,8 +1,10 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using Lab3.Application.DTOs;
 using Lab3.Application.Services.TenantProviderService;
 using Lab3.Domain.Models;
 using Lab3.Persistence;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NpgsqlTypes;
@@ -12,15 +14,15 @@ namespace Lab3.Application.Services.AdminService;
 public class AdminService : IAdminService
 {
     private readonly UmsDbContext _dbContext;
-    private readonly ITenantProviderService _tenantProviderService;
+    private readonly IUserIdentifierService _userIdentifierService;
     private readonly IMapper _mapper;
     private readonly ILogger<AdminService> _logger;
 
-    public AdminService(UmsDbContext dbContext,ITenantProviderService tenantProviderService,ILogger<AdminService> logger)
+    public AdminService(UmsDbContext dbContext,IUserIdentifierService userIdentifierService,ILogger<AdminService> logger)
     {
         _logger = logger;
         _dbContext = dbContext;
-        _tenantProviderService = tenantProviderService;
+        _userIdentifierService = userIdentifierService;
         
         var config = new MapperConfiguration(cfg =>
         {
@@ -29,21 +31,12 @@ public class AdminService : IAdminService
         _mapper = new Mapper(config);
     }
     
-    //Implementation using entity
-    /*public async Task<List<Course>> CreateCourse(Course newCourse)
-    {
-        var tenantId = _tenantProviderService.GetTenantId();
-        newCourse.BranchTenantId = tenantId;
-        _dbContext.Courses.Add(newCourse);
-        await _dbContext.SaveChangesAsync();
-        return await _dbContext.Courses.ToListAsync();
-    }*/
-    
-    
-    //Implementation using DTO to avoid circular references and to expose only required information and details
+    //Used CourseDTO instead of Course model entity to avoid circular references and hide superfluous information
     public async Task<List<Course>> CreateCourse(CourseDTO newCourse)
     {
-        var tenantId = _tenantProviderService.GetTenantId();
+        _logger.LogInformation("test");
+        var tenantId = await _userIdentifierService.GetTenantId();
+        _logger.LogInformation("tenantId="+tenantId);
         var course = _mapper.Map<Course>(newCourse);
         course.BranchTenantId = tenantId;
         _dbContext.Courses.Add(course);

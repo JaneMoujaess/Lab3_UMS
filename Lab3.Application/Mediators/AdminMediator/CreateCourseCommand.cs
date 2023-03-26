@@ -16,8 +16,8 @@ public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand,Li
     public CreateCourseCommandHandler(IAdminService adminService)
     {
         _adminService = adminService;
-        
-    }public async Task<List<Course>> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
+    }
+    public async Task<List<Course>> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
     {
         return await _adminService.CreateCourse(request.newCourse);
     }

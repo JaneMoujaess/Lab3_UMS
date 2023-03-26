@@ -20,7 +20,7 @@ public class StudentController:ControllerBase
     }
     
     [HttpPost("Enroll")]
-    [Authorize(Roles = "student")]
+    [Authorize(Policy = "StudentPermission")]
     public async Task<ActionResult<List<Course>>> EnrollInCourse(int classId)
     {
         return Ok(await _mediator.Send(new EnrollInCourseCommand() { classId = classId }));

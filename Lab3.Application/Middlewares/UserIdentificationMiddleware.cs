@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace Lab3.Application.Middlewares;
 
-public class TenantMiddleware
+public class UserIdentificationMiddleware
 {
     private readonly RequestDelegate _next;
  
-    public TenantMiddleware(RequestDelegate next)
+    public UserIdentificationMiddleware(RequestDelegate next)
     {
         _next = next;
     }
@@ -20,16 +20,12 @@ public class TenantMiddleware
             var token = authHeader.Substring("Bearer ".Length).Trim();
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
-            var tenantId = jwtToken.Claims.FirstOrDefault(c => c.Type == "branchTenantId")?.Value;
-            if (!string.IsNullOrEmpty(tenantId))
+            var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId")?.Value;
+            if (!string.IsNullOrEmpty(userId))
             {
-                context.Items["TenantId"] = tenantId;
+                context.Items["userId"] = userId;
             }
         }
- 
         await _next(context);
     }
 }
-
-
-

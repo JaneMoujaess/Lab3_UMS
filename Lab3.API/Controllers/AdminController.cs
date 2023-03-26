@@ -15,16 +15,19 @@ namespace Lab3.API.Controllers;
 public class AdminController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<AdminController> _logger;
 
-    public AdminController(IMediator mediator)
+    public AdminController(IMediator mediator,ILogger<AdminController> logger)
     {
         _mediator = mediator;
+        _logger = logger;
     }
 
     [HttpPost("CreateCourse")]
-    [Authorize(Roles = "admin")]
+    [Authorize(Policy = "AdminPermission")]
     public async Task<ActionResult<List<Course>>> CreateCourse(CourseDTO newCourse)
     {
+        _logger.LogInformation("authorized");
         return Ok(await _mediator.Send(new CreateCourseCommand { newCourse = newCourse }));
     }
 }

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using dotenv.net;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
@@ -41,7 +42,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.
 builder.Services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
 builder.Services.AddTransient<IAdminService, AdminService>();
 builder.Services.AddTransient<IStudentService, StudentService>();
-builder.Services.AddScoped<ITenantProviderService, TenantProviderService>();
+builder.Services.AddScoped<IUserIdentifierService, UserIdentifierService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
 
 //Odata
@@ -69,7 +70,30 @@ FirebaseApp.Create(new AppOptions
     Credential = GoogleCredential.FromFile("./firebase-config.json")
 });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPermission", policy =>
+        policy.RequireAssertion(context =>
+            context.User.HasClaim(c =>
+                c.Type == "roleId" && c.Value == "1"
+            )
+        )
+    );
+    options.AddPolicy("TeacherPermission", policy =>
+        policy.RequireAssertion(context =>
+            context.User.HasClaim(c =>
+                c.Type == "roleId" && c.Value == "2"
+            )
+        )
+    );
+    options.AddPolicy("StudentPermission", policy =>
+        policy.RequireAssertion(context =>
+            context.User.HasClaim(c =>
+                c.Type == "roleId" && c.Value == "3"
+            )
+        )
+    );
+});
 //JWT handling
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -113,7 +137,7 @@ if (app.Environment.IsDevelopment())
 
 //My middlewares
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.UseMiddleware<TenantMiddleware>();
+app.UseMiddleware<UserIdentificationMiddleware>();
 
 app.UseHttpsRedirection();
 

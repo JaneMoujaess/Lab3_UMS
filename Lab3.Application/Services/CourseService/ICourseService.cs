@@ -1,8 +1,9 @@
-﻿using Lab3.Domain.Models;
+﻿using Lab3.Application.DTOs;
+using Lab3.Domain.Models;
 
 namespace Lab3.Application.Services.CourseService;
 
 public interface ICourseService
 {
-    public Task<List<Course>> GetAllCourses();
+    public Task<List<CourseDTOResponse>> GetAllCourses();
 }

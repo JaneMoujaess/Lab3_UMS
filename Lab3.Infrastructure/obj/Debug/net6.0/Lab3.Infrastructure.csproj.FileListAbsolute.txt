@@ -15,3 +15,7 @@ C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.Infrastructure\obj\Debug\n
 C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.Infrastructure\obj\Debug\net6.0\Lab3.Infrastructure.pdb
 C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.Infrastructure\obj\Debug\net6.0\Lab3.Infrastructure.genruntimeconfig.cache
 C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.Infrastructure\obj\Debug\net6.0\ref\Lab3.Infrastructure.dll
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.Infrastructure\bin\Debug\net6.0\Lab3.Application.dll
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.Infrastructure\bin\Debug\net6.0\Lab3.Persistence.dll
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.Infrastructure\bin\Debug\net6.0\Lab3.Application.pdb
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.Infrastructure\bin\Debug\net6.0\Lab3.Persistence.pdb

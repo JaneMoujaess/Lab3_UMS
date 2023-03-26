@@ -37,7 +37,7 @@ public class ExceptionHandlingMiddleware
             // Handle all other exceptions
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             context.Response.ContentType = "text/plain";
-            await context.Response.WriteAsync(ex.Message);
+            await context.Response.WriteAsync("Stack Trace:\n"+ex.StackTrace+"\n\n"+ex.Message);
 
             //await context.Response.WriteAsync("An unexpected error occurred.");
         }

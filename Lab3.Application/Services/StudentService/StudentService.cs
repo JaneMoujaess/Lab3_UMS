@@ -9,23 +9,27 @@ namespace Lab3.Application.Services.StudentService;
 public class StudentService : IStudentService
 {
     private readonly UmsDbContext _dbContext;
-    private readonly ITenantProviderService _tenantProviderService;
     private readonly ILogger<StudentService> _logger;
+    private readonly IUserIdentifierService _userIdentifierService;
 
-    public StudentService(UmsDbContext dbContext,ITenantProviderService tenantProviderService,ILogger<StudentService> logger)
+    public StudentService(UmsDbContext dbContext, IUserIdentifierService userIdentifierService,ILogger<StudentService> logger)
     {
         _dbContext = dbContext;
-        _tenantProviderService = tenantProviderService;
+        _userIdentifierService = userIdentifierService;
         _logger = logger;
     }
     /*It takes a classId and checks in the database for a class given
     with the same Id. Note a class is the equivalent of a TeacherPerCourse.
     So I am looking for a course given by a specific teacher.
     This unique combo is relative to one and only one class with a particular classId.
-    Also note that courses are being prefiltered with the branch/tenant in mind.*/
+    Also note that courses are being prefiltered with the branch/tenant in mind.
+    
+    I should later also check for number of students<max number of students
+    and that date at which the student enrolled is contained in the enrollment date range of the course
+    */
     public async Task<string> EnrollInClass(int classId)
     {
-        var tenantId = _tenantProviderService.GetTenantId();
+        var tenantId = await _userIdentifierService.GetTenantId();
         
         var classes = from course in _dbContext.Courses
             join teacherPerCourses in _dbContext.TeacherPerCourses on course.Id equals teacherPerCourses.CourseId
@@ -38,7 +42,7 @@ public class StudentService : IStudentService
         if (!classIsAvailable)
             throw new ClassNotFoundException("Class not found");
 
-        ClassEnrollment newClassEnrollment = new ClassEnrollment(classId, 2);//Gotta get the studentId from the jwt somehow
+        ClassEnrollment newClassEnrollment = new ClassEnrollment(classId, _userIdentifierService.GetUserId());
         
         _dbContext.ClassEnrollments.Add(newClassEnrollment);
         await _dbContext.SaveChangesAsync();

@@ -1,4 +1,5 @@
-﻿using Lab3.Infrastructure;
+﻿using Lab3.Application.DTOs;
+using Lab3.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,8 +26,14 @@ public class AuthenticationController : ControllerBase
 
     [HttpPost("signup")]
     [AllowAnonymous]
+    public async Task<ActionResult> SignUp(UserDTO userDto)
+    {
+        return Ok(await _firebaseAuthService.SignUp(userDto));
+    }
+    /*[HttpPost("signup")]
+    [AllowAnonymous]
     public async Task<ActionResult> SignUp(string email, string password,string role,int branchTenantId)
     {
         return Ok(await _firebaseAuthService.SignUp(email,password,role,branchTenantId));
-    }
+    }*/
 }

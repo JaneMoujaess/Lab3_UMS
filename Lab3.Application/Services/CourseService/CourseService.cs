@@ -11,13 +11,13 @@ public class CourseService:ICourseService
 {
     
     private readonly UmsDbContext _dbContext;
-    private readonly ITenantProviderService _tenantProviderService;
     private readonly IMapper _mapper;
-    
-    public CourseService(UmsDbContext dbContext,ITenantProviderService tenantProviderService)
+    private readonly IUserIdentifierService _userIdentifierService;
+
+    public CourseService(UmsDbContext dbContext,IUserIdentifierService userIdentifierService)
     {
         _dbContext = dbContext;
-        _tenantProviderService = tenantProviderService;
+        _userIdentifierService = userIdentifierService;
         
         var config = new MapperConfiguration(cfg =>
         {
@@ -26,12 +26,13 @@ public class CourseService:ICourseService
         _mapper = new Mapper(config);
     }
     
-    public async Task<List<Course>> GetAllCourses()
+    public async Task<List<CourseDTOResponse>> GetAllCourses()
     {
-        var tenantId = _tenantProviderService.GetTenantId();
+        var tenantId = await _userIdentifierService.GetTenantId();
  
-        return await _dbContext.Courses
+        var courses=await _dbContext.Courses
             .Where(e => e.BranchTenantId == tenantId)
             .ToListAsync();
+        return courses.Select(course => _mapper.Map<CourseDTOResponse>(course)).ToList();
     }
 }
