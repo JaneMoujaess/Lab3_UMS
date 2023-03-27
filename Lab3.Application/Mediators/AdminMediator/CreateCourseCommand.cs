@@ -6,7 +6,7 @@ namespace Lab3.Application.Mediators.AdminMediator.AdminCommands;
 
 public class CreateCourseCommand : IRequest<List<Course>>
 {
-    public CourseDTO newCourse { set; get; }
+    public CourseDTORequest newCourse { set; get; }
 }
 
 public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand,List<Course>>

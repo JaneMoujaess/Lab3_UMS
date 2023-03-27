@@ -25,7 +25,7 @@ public class AdminController : ControllerBase
 
     [HttpPost("CreateCourse")]
     [Authorize(Policy = "AdminPermission")]
-    public async Task<ActionResult<List<Course>>> CreateCourse(CourseDTO newCourse)
+    public async Task<ActionResult<List<Course>>> CreateCourse(CourseDTORequest newCourse)
     {
         _logger.LogInformation("authorized");
         return Ok(await _mediator.Send(new CreateCourseCommand { newCourse = newCourse }));

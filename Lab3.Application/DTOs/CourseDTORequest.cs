@@ -2,7 +2,7 @@
 
 namespace Lab3.Application.DTOs;
 
-public class CourseDTO
+public class CourseDTORequest
 {
     public string? Name { get; set; }
 

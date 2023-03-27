@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using AutoMapper;
 using Lab3.Application.DTOs;
-using Lab3.Application.Services.TenantProviderService;
+using Lab3.Application.Services.UserIdentifierService;
 using Lab3.Domain.Models;
 using Lab3.Persistence;
 using Microsoft.AspNetCore.Http;
@@ -32,7 +32,7 @@ public class AdminService : IAdminService
     }
     
     //Used CourseDTO instead of Course model entity to avoid circular references and hide superfluous information
-    public async Task<List<Course>> CreateCourse(CourseDTO newCourse)
+    public async Task<List<Course>> CreateCourse(CourseDTORequest newCourse)
     {
         _logger.LogInformation("test");
         var tenantId = await _userIdentifierService.GetTenantId();

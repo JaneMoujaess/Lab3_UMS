@@ -24,12 +24,8 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0-preview.2.23128.3" />
         <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0-preview.2.23128.3" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3" />
+        <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.10.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Mediators\TeacherMediator\TeacherCommands" />
-        <Folder Include="Mediators\TeacherMediator\TeacherQueries" />
     </ItemGroup>
 
     <ItemGroup>

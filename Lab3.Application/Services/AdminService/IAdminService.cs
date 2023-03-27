@@ -5,5 +5,5 @@ using Lab3.Domain.Models;
 
 public interface IAdminService
 {
-    public Task<List<Course>> CreateCourse(CourseDTO newCourse);
+    public Task<List<Course>> CreateCourse(CourseDTORequest newCourse);
 }

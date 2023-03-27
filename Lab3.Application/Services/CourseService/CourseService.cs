@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Lab3.Application.DTOs;
-using Lab3.Application.Services.TenantProviderService;
+using Lab3.Application.Services.UserIdentifierService;
 using Lab3.Domain.Models;
 using Lab3.Persistence;
 using Microsoft.EntityFrameworkCore;

@@ -6,7 +6,8 @@ using Lab3.Application.Middlewares;
 using Lab3.Application.Services.AdminService;
 using Lab3.Application.Services.CourseService;
 using Lab3.Application.Services.StudentService;
-using Lab3.Application.Services.TenantProviderService;
+using Lab3.Application.Services.TeacherService;
+using Lab3.Application.Services.UserIdentifierService;
 using Lab3.Domain.Models;
 using Lab3.Infrastructure;
 using Lab3.Persistence;
@@ -42,6 +43,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.
 builder.Services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
 builder.Services.AddTransient<IAdminService, AdminService>();
 builder.Services.AddTransient<IStudentService, StudentService>();
+builder.Services.AddTransient<ITeacherService, TeacherService>();
 builder.Services.AddScoped<IUserIdentifierService, UserIdentifierService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
 

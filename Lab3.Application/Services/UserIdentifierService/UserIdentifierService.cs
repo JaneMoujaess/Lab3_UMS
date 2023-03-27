@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Lab3.Application.Services.TenantProviderService;
+namespace Lab3.Application.Services.UserIdentifierService;
 
 public interface IUserIdentifierService
 {

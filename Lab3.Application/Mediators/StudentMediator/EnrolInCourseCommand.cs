@@ -7,7 +7,7 @@ namespace Lab3.Application.Mediators.StudentMediator;
 
 public class EnrollInCourseCommand:IRequest<string>
 {
-    public int classId { set; get; }
+    public long classId { set; get; }
 }
 
 public class EnrollInCourseCommandHandler : IRequestHandler<EnrollInCourseCommand, string>

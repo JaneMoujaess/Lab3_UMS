@@ -1,7 +1,8 @@
-﻿using Lab3.Application.Services.TenantProviderService;
+﻿using Lab3.Application.Services.UserIdentifierService;
 using Lab3.Domain.Models;
 using Lab3.Persistence;
 using Lab3.Persistence.Exceptions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Lab3.Application.Services.StudentService;
@@ -27,25 +28,29 @@ public class StudentService : IStudentService
     I should later also check for number of students<max number of students
     and that date at which the student enrolled is contained in the enrollment date range of the course
     */
-    public async Task<string> EnrollInClass(int classId)
+    public async Task<string> EnrollInClass(long classId)
     {
         var tenantId = await _userIdentifierService.GetTenantId();
         
-        var classes = from course in _dbContext.Courses
+        var courses = _dbContext.Courses.Include(course => course.TeacherPerCourses)
+            .FirstOrDefault(course => course.BranchTenantId == tenantId 
+                                      && course.TeacherPerCourses.Any(perCourse => perCourse.Id == classId));
+        
+        /*var classes = from course in _dbContext.Courses
             join teacherPerCourses in _dbContext.TeacherPerCourses on course.Id equals teacherPerCourses.CourseId
-            select new { Course = course, classId = teacherPerCourses.Id };
+            select new { Course = course, classId = teacherPerCourses.Id };*/
 
-        var classIsAvailable =
-            classes.Where(desiredClass => desiredClass.Course.BranchTenantId == tenantId)
-                .Select(desiredClass => desiredClass.classId).Contains(classId);
-
-        if (!classIsAvailable)
+        if (courses == null)
+        {
             throw new ClassNotFoundException("Class not found");
-
+        }
+        
         ClassEnrollment newClassEnrollment = new ClassEnrollment(classId, _userIdentifierService.GetUserId());
         
         _dbContext.ClassEnrollments.Add(newClassEnrollment);
         await _dbContext.SaveChangesAsync();
+        
+        channel.ExchangeDeclare("logs", ExchangeType.Fanout);
 
         return "Student x enrolled successfully in course y";
     }
