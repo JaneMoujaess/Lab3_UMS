@@ -21,19 +21,16 @@ public class TeacherService : ITeacherService
     {
         var tenantId = await _userIdentifierService.GetTenantId();
 
-        var teachableCourses = await _dbContext.Courses.Where(course => course.BranchTenantId == tenantId).ToListAsync();
+        var desiredCourse = await _dbContext.Courses.SingleOrDefaultAsync(course => course.BranchTenantId == tenantId 
+            && course.Id==courseId);
 
-        var desiredCourseId = teachableCourses.SingleOrDefault(desiredCourse => desiredCourse.Id==courseId).Id;
-
-        var courseIsAvailable = desiredCourseId != null && (desiredCourseId == 0 ? false : true);
-           
-        if (!courseIsAvailable)
-            throw new CourseNotFoundException("Course not found");
+        if (desiredCourse==null)
+            throw new NotFoundException("Course not found");
 
 
         TeacherPerCourse newClass = new TeacherPerCourse();
         newClass.TeacherId = _userIdentifierService.GetUserId();
-        newClass.CourseId = desiredCourseId;
+        newClass.CourseId = desiredCourse.Id;
 
         _dbContext.TeacherPerCourses.Add(newClass);
         await _dbContext.SaveChangesAsync();
@@ -42,8 +39,11 @@ public class TeacherService : ITeacherService
     }
     public async Task<string> TeachCourse(long courseId,long sessionTimeId)
     {
-
         var classId = await TeachCourseHelper(courseId);
+
+        if (_dbContext.SessionTimes.SingleOrDefault(sessionTime => sessionTime.Id == sessionTimeId) == null)
+            throw new NotFoundException("Session time not found");
+        
         TeacherPerCoursePerSessionTime newClassSession = new TeacherPerCoursePerSessionTime();
         newClassSession.TeacherPerCourseId = classId;
         newClassSession.SessionTimeId = sessionTimeId;

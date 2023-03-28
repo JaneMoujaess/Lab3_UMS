@@ -3,6 +3,8 @@ using Firebase.Auth;
 using Lab3.Application.Exceptions;
 using Lab3.Persistence.Exceptions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 namespace Lab3.Application.Middlewares;
 
@@ -21,24 +23,38 @@ public class ExceptionHandlingMiddleware
         {
             await _next(context);
         }
-        catch (ClassNotFoundException ex)
+        catch (NotFoundException ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            context.Response.ContentType = "text/plain";
             await context.Response.WriteAsync(ex.Message);
         }
         catch (FullClassException ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            context.Response.ContentType = "text/plain";
             await context.Response.WriteAsync(ex.Message);
         }
         catch (DateNotInEnrollmentRange ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            context.Response.ContentType = "text/plain";
+            await context.Response.WriteAsync(ex.Message);
+        }
+        catch (DbUpdateException ex)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            context.Response.ContentType = "text/plain";
+            await context.Response.WriteAsync(ex.Message);
+        }
+        catch (PostgresException ex)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            context.Response.ContentType = "text/plain";
             await context.Response.WriteAsync(ex.Message);
         }
         catch (FirebaseAuthException ex)
         {
-            // Handle the Firebase exception
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             context.Response.ContentType = "text/plain";
             await context.Response.WriteAsync(ex.Message);

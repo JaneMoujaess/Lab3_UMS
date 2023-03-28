@@ -46,7 +46,7 @@ public class StudentService : IStudentService,IMessageProducer
             select new { Course = course, classId = teacherPerCourses.Id };*/
 
         if (desiredClass == null)
-            throw new ClassNotFoundException("Class not found");
+            throw new NotFoundException("Class not found");
 
         
         //Check for max number of students
