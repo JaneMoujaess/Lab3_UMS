@@ -13,5 +13,9 @@ public partial class SessionTime
 
     public int Duration { get; set; }
 
+    public long TeacherId { get; set; }
+
+    public virtual User Teacher { get; set; } = null!;
+
     public virtual ICollection<TeacherPerCoursePerSessionTime> TeacherPerCoursePerSessionTimes { get; } = new List<TeacherPerCoursePerSessionTime>();
 }

@@ -1,13 +1,17 @@
-﻿using Lab3.Application.Services.UserIdentifierService;
+﻿using System.Text;
+using Lab3.Application.Services.UserIdentifierService;
 using Lab3.Domain.Models;
 using Lab3.Persistence;
 using Lab3.Persistence.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
 
 namespace Lab3.Application.Services.StudentService;
 
-public class StudentService : IStudentService
+public class StudentService : IStudentService,IMessageProducer
 {
     private readonly UmsDbContext _dbContext;
     private readonly ILogger<StudentService> _logger;
@@ -45,13 +49,28 @@ public class StudentService : IStudentService
             throw new ClassNotFoundException("Class not found");
         }
         
-        ClassEnrollment newClassEnrollment = new ClassEnrollment(classId, _userIdentifierService.GetUserId());
+        ClassEnrollment newClassEnrollment = new ClassEnrollment();
+        newClassEnrollment.ClassId = classId;
+        newClassEnrollment.StudentId = _userIdentifierService.GetUserId();
         
         _dbContext.ClassEnrollments.Add(newClassEnrollment);
         await _dbContext.SaveChangesAsync();
         
-        channel.ExchangeDeclare("logs", ExchangeType.Fanout);
+        //SendMessage("sending test");
 
         return "Student x enrolled successfully in course y";
+    }
+
+    public void SendMessage<T>(T message)
+    {
+        var factory = new ConnectionFactory { HostName = "localhost" };
+        var connection = factory.CreateConnection();
+        using var channel = connection.CreateModel();
+        channel.QueueDeclare("notifications");
+
+        var json = JsonConvert.SerializeObject(message);
+        var body = Encoding.UTF8.GetBytes(json);
+
+        channel.BasicPublish(exchange: "", routingKey: "notifications", body: body);
     }
 }

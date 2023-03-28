@@ -2035,6 +2035,28 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
+      "Lab3.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
+          "Firebase.Auth": "1.0.0",
+          "FirebaseAdmin": "2.3.0",
+          "MediatR": "12.0.1",
+          "Microsoft.EntityFrameworkCore": "7.0.3",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0-preview.2.23128.3",
+          "Microsoft.Extensions.Options.ConfigurationExtensions": "8.0.0-preview.2.23128.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.3",
+          "RabbitMQ.Client": "6.5.0",
+          "dotenv.net": "3.1.2"
+        },
+        "compile": {
+          "bin/placeholder/Lab3.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Lab3.Common.dll": {}
+        }
+      },
       "Lab3.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -6546,6 +6568,11 @@
         "system.xml.xdocument.nuspec"
       ]
     },
+    "Lab3.Common/1.0.0": {
+      "type": "project",
+      "path": "../Lab3.Common/Lab3.Common.csproj",
+      "msbuildProject": "../Lab3.Common/Lab3.Common.csproj"
+    },
     "Lab3.Domain/1.0.0": {
       "type": "project",
       "path": "../Lab3.Domain/Lab3.Domain.csproj",
@@ -6560,6 +6587,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.0",
+      "Lab3.Common >= 1.0.0",
       "Lab3.Domain >= 1.0.0",
       "Lab3.Persistence >= 1.0.0",
       "MediatR >= 12.0.1",
@@ -6600,6 +6628,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "C:\\Users\\USER\\Desktop\\Jane\\inmind\\Labs\\Lab3\\Lab3\\Lab3.Common\\Lab3.Common.csproj": {
+              "projectPath": "C:\\Users\\USER\\Desktop\\Jane\\inmind\\Labs\\Lab3\\Lab3\\Lab3.Common\\Lab3.Common.csproj"
+            },
             "C:\\Users\\USER\\Desktop\\Jane\\inmind\\Labs\\Lab3\\Lab3\\Lab3.Domain\\Lab3.Domain.csproj": {
               "projectPath": "C:\\Users\\USER\\Desktop\\Jane\\inmind\\Labs\\Lab3\\Lab3\\Lab3.Domain\\Lab3.Domain.csproj"
             },

@@ -1,8 +1,9 @@
-﻿using NpgsqlTypes;
+﻿using Lab3.Common;
+using NpgsqlTypes;
 
 namespace Lab3.Application.DTOs;
 
-public class CourseDTORequest
+public class CourseDtoRequest
 {
     public string? Name { get; set; }
 
@@ -10,11 +11,4 @@ public class CourseDTORequest
     public Date StartEnrollment { get; set; }
     public Date EndEnrollment { get; set; }
     
-}
-
-public class Date
-{
-    public int Year { get; set; }
-    public int Month { get; set; }
-    public int Day { get; set; }
 }

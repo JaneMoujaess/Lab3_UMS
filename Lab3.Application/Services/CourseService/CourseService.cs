@@ -26,13 +26,13 @@ public class CourseService:ICourseService
         _mapper = new Mapper(config);
     }
     
-    public async Task<List<CourseDTOResponse>> GetAllCourses()
+    public async Task<List<CourseDtoResponse>> GetAllCourses()
     {
         var tenantId = await _userIdentifierService.GetTenantId();
  
         var courses=await _dbContext.Courses
             .Where(e => e.BranchTenantId == tenantId)
             .ToListAsync();
-        return courses.Select(course => _mapper.Map<CourseDTOResponse>(course)).ToList();
+        return courses.Select(course => _mapper.Map<CourseDtoResponse>(course)).ToList();
     }
 }

@@ -19,3 +19,5 @@ C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.Infrastructure\bin\Debug\n
 C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.Infrastructure\bin\Debug\net6.0\Lab3.Persistence.dll
 C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.Infrastructure\bin\Debug\net6.0\Lab3.Application.pdb
 C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.Infrastructure\bin\Debug\net6.0\Lab3.Persistence.pdb
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.Infrastructure\bin\Debug\net6.0\Lab3.Common.dll
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.Infrastructure\bin\Debug\net6.0\Lab3.Common.pdb

@@ -5,12 +5,12 @@ using MediatR;
 
 namespace Lab3.Application.Mediators.CourseMediator;
 
-public class GetAllCoursesQuery:IRequest<List<CourseDTOResponse>>
+public class GetAllCoursesQuery:IRequest<List<CourseDtoResponse>>
 {
     
 }
 
-public class GetAllCoursesQueryHandler : IRequestHandler<GetAllCoursesQuery, List<CourseDTOResponse>>
+public class GetAllCoursesQueryHandler : IRequestHandler<GetAllCoursesQuery, List<CourseDtoResponse>>
 {
     private readonly ICourseService _courseService;
 
@@ -18,7 +18,7 @@ public class GetAllCoursesQueryHandler : IRequestHandler<GetAllCoursesQuery, Lis
     {
         _courseService = courseService;
     }
-    public async Task<List<CourseDTOResponse>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
+    public async Task<List<CourseDtoResponse>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
     {
         return await _courseService.GetAllCourses();
     }

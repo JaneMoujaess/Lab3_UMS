@@ -40,7 +40,7 @@ public class FirebaseAuthService : IFirebaseAuthService
         return token;
     }
 
-    public async Task<string> SignUp(UserDTO userDto)
+    public async Task<string> SignUp(UserDto userDto)
     {
         var fbUser = await _auth.CreateUserWithEmailAndPasswordAsync(userDto.Email, userDto.Password);
         

@@ -98,10 +98,18 @@ public partial class UmsDbContext : DbContext
 
             entity.ToTable("SessionTime");
 
+            entity.HasIndex(e => e.TeacherId, "fki_session_time_users_id_fk");
+
             entity.HasIndex(e => e.Id, "sessiontime_id_uindex").IsUnique();
 
             entity.Property(e => e.EndTime).HasColumnType("timestamp without time zone");
             entity.Property(e => e.StartTime).HasColumnType("timestamp without time zone");
+            entity.Property(e => e.TeacherId).ValueGeneratedOnAdd();
+
+            entity.HasOne(d => d.Teacher).WithMany(p => p.SessionTimes)
+                .HasForeignKey(d => d.TeacherId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("session_time_users_id_fk");
         });
 
         modelBuilder.Entity<TeacherPerCourse>(entity =>

@@ -29,6 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Lab3.Common\Lab3.Common.csproj" />
         <ProjectReference Include="..\Lab3.Domain\Lab3.Domain.csproj" />
         <ProjectReference Include="..\Lab3.Persistence\Lab3.Persistence.csproj" />
     </ItemGroup>

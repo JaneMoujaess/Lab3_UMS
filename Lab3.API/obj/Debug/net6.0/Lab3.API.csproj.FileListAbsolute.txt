@@ -89,3 +89,7 @@ C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.API\obj\Debug\net6.0\ref\L
 C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.API\bin\Debug\net6.0\dotenv.net.dll
 C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.API\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.API\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.API\bin\Debug\net6.0\RabbitMQ.Client.dll
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.API\bin\Debug\net6.0\System.Threading.Channels.dll
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.API\bin\Debug\net6.0\Lab3.Common.dll
+C:\Users\USER\Desktop\Jane\inmind\Labs\Lab3\Lab3\Lab3.API\bin\Debug\net6.0\Lab3.Common.pdb

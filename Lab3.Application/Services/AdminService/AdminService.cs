@@ -32,7 +32,7 @@ public class AdminService : IAdminService
     }
     
     //Used CourseDTO instead of Course model entity to avoid circular references and hide superfluous information
-    public async Task<List<Course>> CreateCourse(CourseDTORequest newCourse)
+    public async Task<List<Course>> CreateCourse(CourseDtoRequest newCourse)
     {
         _logger.LogInformation("test");
         var tenantId = await _userIdentifierService.GetTenantId();

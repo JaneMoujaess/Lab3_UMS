@@ -23,5 +23,7 @@ public partial class User
 
     public virtual Role Role { get; set; } = null!;
 
+    public virtual ICollection<SessionTime> SessionTimes { get; } = new List<SessionTime>();
+
     public virtual ICollection<TeacherPerCourse> TeacherPerCourses { get; } = new List<TeacherPerCourse>();
 }

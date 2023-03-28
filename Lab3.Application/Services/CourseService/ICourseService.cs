@@ -5,5 +5,5 @@ namespace Lab3.Application.Services.CourseService;
 
 public interface ICourseService
 {
-    public Task<List<CourseDTOResponse>> GetAllCourses();
+    public Task<List<CourseDtoResponse>> GetAllCourses();
 }

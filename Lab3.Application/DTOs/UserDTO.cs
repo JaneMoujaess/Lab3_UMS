@@ -1,6 +1,6 @@
 ﻿namespace Lab3.Application.DTOs;
 
-public class UserDTO
+public class UserDto
 {
     public string Name { get; set; } = null!;
 

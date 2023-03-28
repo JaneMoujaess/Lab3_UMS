@@ -46,6 +46,7 @@ builder.Services.AddTransient<IStudentService, StudentService>();
 builder.Services.AddTransient<ITeacherService, TeacherService>();
 builder.Services.AddScoped<IUserIdentifierService, UserIdentifierService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
+//builder.Services.AddScoped<IMessageProducer, StudentService>();
 
 //Odata
 static IEdmModel GetEdmModel()

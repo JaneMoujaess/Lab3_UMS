@@ -8,13 +8,13 @@ public class AutoMapperProfile:Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<Course, CourseDTOResponse>();
-        CreateMap<CourseDTORequest, Course>().ForMember(dest=>dest.EnrolmentDateRange,
+        CreateMap<Course, CourseDtoResponse>();
+        CreateMap<CourseDtoRequest, Course>().ForMember(dest=>dest.EnrolmentDateRange,
             opt=>opt.MapFrom(src=>
                 new NpgsqlRange<DateOnly>(new DateOnly(src.StartEnrollment.Year,src.StartEnrollment.Month,src.StartEnrollment.Day),
                     new DateOnly(src.EndEnrollment.Year,src.EndEnrollment.Month,src.EndEnrollment.Day))));
 
-        CreateMap<User, UserDTO>();//Not yet implemented
-        CreateMap<UserDTO, User>();
+        CreateMap<User, UserDto>();//Not yet implemented
+        CreateMap<UserDto, User>();
     }
 }

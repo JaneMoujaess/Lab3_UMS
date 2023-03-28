@@ -5,7 +5,8 @@ namespace Lab3.Application.Mediators.TeacherMediator;
 
 public class TeachCourseCommand:IRequest<string>
 {
-    public long courseId { set; get; }
+    public long CourseId { set; get; }
+    public long SessionTimeId { set; get; }
 }
 
 public class TeachCourseCommandHandler : IRequestHandler<TeachCourseCommand, string>
@@ -18,6 +19,6 @@ public class TeachCourseCommandHandler : IRequestHandler<TeachCourseCommand, str
         
     }public async Task<string> Handle(TeachCourseCommand request, CancellationToken cancellationToken)
     {
-        return await _teacherService.TeachCourse(request.courseId);
+        return await _teacherService.TeachCourse(request.CourseId,request.SessionTimeId);
     }
 }
