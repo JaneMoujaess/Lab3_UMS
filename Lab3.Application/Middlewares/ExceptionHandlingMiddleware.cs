@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Firebase.Auth;
+using Lab3.Application.Exceptions;
 using Lab3.Persistence.Exceptions;
 using Microsoft.AspNetCore.Http;
 
@@ -23,6 +24,16 @@ public class ExceptionHandlingMiddleware
         catch (ClassNotFoundException ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            await context.Response.WriteAsync(ex.Message);
+        }
+        catch (FullClassException ex)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            await context.Response.WriteAsync(ex.Message);
+        }
+        catch (DateNotInEnrollmentRange ex)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             await context.Response.WriteAsync(ex.Message);
         }
         catch (FirebaseAuthException ex)

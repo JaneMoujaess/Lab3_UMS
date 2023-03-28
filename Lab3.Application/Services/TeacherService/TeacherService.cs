@@ -17,30 +17,6 @@ public class TeacherService : ITeacherService
         _dbContext = dbContext;
         _userIdentifierService = userIdentifierService;
     }
-    
-    /*public async Task<string> TeachCourse(long courseId)
-    {
-        var tenantId = await _userIdentifierService.GetTenantId();
-
-        var teachableCourses = await _dbContext.Courses.Where(course => course.BranchTenantId == tenantId).ToListAsync();
-
-        var desiredCourseId = teachableCourses.SingleOrDefault(desiredCourse => desiredCourse.Id==courseId).Id;
-
-        var courseIsAvailable = desiredCourseId != null && (desiredCourseId == 0 ? false : true);
-           
-        if (!courseIsAvailable)
-            throw new CourseNotFoundException("Course not found");
-
-
-        TeacherPerCourse newClass = new TeacherPerCourse();
-        newClass.TeacherId = _userIdentifierService.GetUserId();
-        newClass.CourseId = desiredCourseId;
-
-        _dbContext.TeacherPerCourses.Add(newClass);
-        await _dbContext.SaveChangesAsync();
-
-        return "Course x successfully registered by teacher y";
-    }*/
     public async Task<long> TeachCourseHelper(long courseId)
     {
         var tenantId = await _userIdentifierService.GetTenantId();

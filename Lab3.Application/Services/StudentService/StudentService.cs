@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Lab3.Application.Exceptions;
 using Lab3.Application.Services.UserIdentifierService;
 using Lab3.Domain.Models;
 using Lab3.Persistence;
@@ -36,7 +37,7 @@ public class StudentService : IStudentService,IMessageProducer
     {
         var tenantId = await _userIdentifierService.GetTenantId();
         
-        var courses = _dbContext.Courses.Include(course => course.TeacherPerCourses)
+        var desiredClass = _dbContext.Courses.Include(course => course.TeacherPerCourses)
             .FirstOrDefault(course => course.BranchTenantId == tenantId 
                                       && course.TeacherPerCourses.Any(perCourse => perCourse.Id == classId));
         
@@ -44,10 +45,23 @@ public class StudentService : IStudentService,IMessageProducer
             join teacherPerCourses in _dbContext.TeacherPerCourses on course.Id equals teacherPerCourses.CourseId
             select new { Course = course, classId = teacherPerCourses.Id };*/
 
-        if (courses == null)
-        {
+        if (desiredClass == null)
             throw new ClassNotFoundException("Class not found");
-        }
+
+        
+        //Check for max number of students
+        var numOfStudentsEnrolled =
+            _dbContext.ClassEnrollments.Where(desiredClass => desiredClass.ClassId == classId).Count();
+        
+        if (numOfStudentsEnrolled >= desiredClass.MaxStudentsNumber)
+            throw new FullClassException("Maximum number of students reached");
+
+        //check for date of enrollment validity
+        DateOnly dateOfEnrollment = DateOnly.FromDateTime(DateTime.Now);
+        if (!(desiredClass.EnrolmentDateRange.Value.LowerBound <= dateOfEnrollment
+              && desiredClass.EnrolmentDateRange.Value.UpperBound >= dateOfEnrollment))
+            throw new DateNotInEnrollmentRange("Can't enroll at the current date");
+            
         
         ClassEnrollment newClassEnrollment = new ClassEnrollment();
         newClassEnrollment.ClassId = classId;
