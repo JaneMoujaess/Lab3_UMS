@@ -1,4 +1,4 @@
-﻿namespace Lab3.Persistence.Exceptions;
+﻿namespace Lab3.Application.Exceptions;
 
 public class NotFoundException:Exception
 {

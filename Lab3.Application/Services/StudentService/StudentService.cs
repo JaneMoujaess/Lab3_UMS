@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Lab3.Application.DTOs;
 using Lab3.Application.Exceptions;
 using Lab3.Application.Services.UserIdentifierService;
 using Lab3.Domain.Models;
@@ -12,17 +13,15 @@ using RabbitMQ.Client;
 
 namespace Lab3.Application.Services.StudentService;
 
-public class StudentService : IStudentService,IMessageProducer
+public class StudentService : IStudentService,IPublisher
 {
     private readonly UmsDbContext _dbContext;
-    private readonly ILogger<StudentService> _logger;
     private readonly IUserIdentifierService _userIdentifierService;
 
-    public StudentService(UmsDbContext dbContext, IUserIdentifierService userIdentifierService,ILogger<StudentService> logger)
+    public StudentService(UmsDbContext dbContext, IUserIdentifierService userIdentifierService)
     {
         _dbContext = dbContext;
         _userIdentifierService = userIdentifierService;
-        _logger = logger;
     }
     /*It takes a classId and checks in the database for a class given
     with the same Id. Note a class is the equivalent of a TeacherPerCourse.
@@ -65,24 +64,34 @@ public class StudentService : IStudentService,IMessageProducer
         
         ClassEnrollment newClassEnrollment = new ClassEnrollment();
         newClassEnrollment.ClassId = classId;
-        newClassEnrollment.StudentId = _userIdentifierService.GetUserId();
+        var studentId=_userIdentifierService.GetUserId();
+        newClassEnrollment.StudentId = studentId;
         
         _dbContext.ClassEnrollments.Add(newClassEnrollment);
         await _dbContext.SaveChangesAsync();
+
+        var classes =
+            await _dbContext.TeacherPerCourses.SingleOrDefaultAsync(desiredClass => desiredClass.Id == classId);
+        var courseId = classes.CourseId;
+        var teacherId = classes.TeacherId;
         
-        //SendMessage("sending test");
+        PublishNotification(new NotificationDto(){TeacherId = teacherId,StudentId = studentId,CourseId = courseId});
 
         return "Student x enrolled successfully in course y";
     }
 
-    public void SendMessage<T>(T message)
+    public void PublishNotification<T>(T notification)
     {
         var factory = new ConnectionFactory { HostName = "localhost" };
         var connection = factory.CreateConnection();
-        using var channel = connection.CreateModel();
-        channel.QueueDeclare("notifications");
+        var channel = connection.CreateModel();
+        channel.QueueDeclare("notifications",
+            durable: false,
+            exclusive: false,
+            autoDelete: false,
+            arguments: null);
 
-        var json = JsonConvert.SerializeObject(message);
+        var json = JsonConvert.SerializeObject(notification);
         var body = Encoding.UTF8.GetBytes(json);
 
         channel.BasicPublish(exchange: "", routingKey: "notifications", body: body);

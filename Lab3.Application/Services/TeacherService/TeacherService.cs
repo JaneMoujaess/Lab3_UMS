@@ -1,4 +1,5 @@
-﻿using Lab3.Application.Services.UserIdentifierService;
+﻿using Lab3.Application.Exceptions;
+using Lab3.Application.Services.UserIdentifierService;
 using Lab3.Domain.Models;
 using Lab3.Persistence;
 using Lab3.Persistence.Exceptions;
