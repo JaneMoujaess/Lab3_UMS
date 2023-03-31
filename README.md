@@ -22,7 +22,7 @@
 -Above mentioned methods are only valid for users' specific tenantIds (branchIds).\
 ex: Admins of branch 2 can only create courses for branch 2. Similarly, students of branch 1 are only capable of enrolling in courses of branch 1, etc.
 
-## Authentication and Authorizatiom ##
+## Authentication and Authorization ##
 *User is able to signup/signin through Firebase.\
 *Authentication/Authorization handled by JWT with custom claim (userID) that allows:\
 -the implementation of multitenancy based on that user's tenant.\
