@@ -30,18 +30,4 @@ public class PublisherService:IPublisherService
 
         _channel.BasicPublish(exchange: "", routingKey: queueName, body: body);
     }
-
-    /*public void PublishMessage<T>(string queueName,T messageToPublish)
-    {
-        _channel.QueueDeclare(queueName,
-            durable: false,
-            exclusive: false,
-            autoDelete: false,
-            arguments: null);
-
-        var json = JsonConvert.SerializeObject(messageToPublish);
-        var body = Encoding.UTF8.GetBytes(json);
-
-        _channel.BasicPublish(exchange: "", routingKey: queueName, body: body);
-    }*/
 }

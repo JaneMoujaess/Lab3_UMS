@@ -17,6 +17,8 @@ public partial class User
 
     public long BranchTenantId { get; set; }
 
+    public string? Gender { get; set; }
+
     public virtual BranchTenant BranchTenant { get; set; } = null!;
 
     public virtual ICollection<ClassEnrollment> ClassEnrollments { get; } = new List<ClassEnrollment>();

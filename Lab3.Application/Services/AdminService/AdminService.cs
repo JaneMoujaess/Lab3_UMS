@@ -43,4 +43,31 @@ public class AdminService : IAdminService
         await _dbContext.SaveChangesAsync();
         return await _dbContext.Courses.ToListAsync();
     }
+
+    public async Task<List<string>> GetCommonStudents(long firstTeacherId, long secondTeacherId)
+    {
+        var tenantId = await _userIdentifierService.GetTenantId();
+
+        List<string> commonStudents = await
+            (from teacherPerCourse1 in _dbContext.TeacherPerCourses
+            join classEnrollments1 in _dbContext.ClassEnrollments on teacherPerCourse1.Id equals classEnrollments1.ClassId
+            join users1 in _dbContext.Users on classEnrollments1.StudentId equals users1.Id
+            join teacherPerCourse2 in _dbContext.TeacherPerCourses on teacherPerCourse1.CourseId equals teacherPerCourse2.CourseId
+            join classEnrollments2 in _dbContext.ClassEnrollments on teacherPerCourse2.Id equals classEnrollments2.ClassId
+            join users2 in _dbContext.Users on classEnrollments2.StudentId equals users2.Id
+            where users1.BranchTenantId==tenantId
+            where users2.BranchTenantId==tenantId
+            where teacherPerCourse1.TeacherId == firstTeacherId && teacherPerCourse2.TeacherId == secondTeacherId
+            select users1.Name)
+            .Distinct()
+            .ToListAsync();
+
+        return commonStudents;
+    }
+
+    // todo: implement the distribution of courses by gender functionality
+    public async Task<List<GenderStatistics>> GetGenderStatistics()
+    {
+        throw new NotImplementedException();
+    }
 }

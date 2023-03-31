@@ -26,15 +26,6 @@ public class StudentService : IStudentService
         _userIdentifierService = userIdentifierService;
         _publisherService = publisherService;
     }
-    /*It takes a classId and checks in the database for a class given
-    with the same Id. Note a class is the equivalent of a TeacherPerCourse.
-    So I am looking for a course given by a specific teacher.
-    This unique combo is relative to one and only one class with a particular classId.
-    Also note that courses are being prefiltered with the branch/tenant in mind.
-    
-    I should later also check for number of students<max number of students
-    and that date at which the student enrolled is contained in the enrollment date range of the course
-    */
     public async Task<string> EnrollInClass(long classId)
     {
         var tenantId = await _userIdentifierService.GetTenantId();
@@ -43,6 +34,7 @@ public class StudentService : IStudentService
             .FirstOrDefault(course => course.BranchTenantId == tenantId 
                                       && course.TeacherPerCourses.Any(perCourse => perCourse.Id == classId));
         
+        //Alternative inner join approach
         /*var classes = from course in _dbContext.Courses
             join teacherPerCourses in _dbContext.TeacherPerCourses on course.Id equals teacherPerCourses.CourseId
             select new { Course = course, classId = teacherPerCourses.Id };*/
@@ -82,21 +74,4 @@ public class StudentService : IStudentService
 
         return "Student x enrolled successfully in course y";
     }
-
-    /*public void Publish<T>(T notification)
-    {
-        var factory = new ConnectionFactory { HostName = "localhost" };
-        var connection = factory.CreateConnection();
-        var channel = connection.CreateModel();
-        channel.QueueDeclare("notifications",
-            durable: false,
-            exclusive: false,
-            autoDelete: false,
-            arguments: null);
-
-        var json = JsonConvert.SerializeObject(notification);
-        var body = Encoding.UTF8.GetBytes(json);
-
-        channel.BasicPublish(exchange: "", routingKey: "notifications", body: body);
-    }*/
 }

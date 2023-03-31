@@ -1,4 +1,5 @@
 ﻿using Lab3.Application.DTOs;
+using Lab3.Application.Mediators.AdminMediator;
 using Lab3.Application.Mediators.AdminMediator.AdminCommands;
 using Lab3.Application.Mediators.CourseMediator;
 using Lab3.Domain.Models;
@@ -30,4 +31,20 @@ public class AdminController : ControllerBase
         _logger.LogInformation("authorized");
         return Ok(await _mediator.Send(new CreateCourseCommand { NewCourse = newCourse }));
     }
+
+    [HttpGet("commonStudents")]
+    [Authorize(Policy = "AdminPermission")]
+    public async Task<ActionResult<List<string>>> GetCommonStudents(long firstTeacherId, long secondTeacherId)
+    {
+        return Ok(await _mediator.Send(new GetCommonStudentsQuery { FirstTeacherId = firstTeacherId,SecondTeacherId = secondTeacherId}));
+    }
+    
+    [HttpGet("genderStatistics")]
+    [Authorize(Policy = "AdminPermission")]
+    public async Task<ActionResult<List<string>>> GetGenderStatistics()
+    {
+        return Ok(await _mediator.Send(new GetGenderStatisticsQuery()));
+    }
+    
+    
 }
