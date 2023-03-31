@@ -8,6 +8,7 @@ using Npgsql;
 
 namespace Lab3.Application.Middlewares;
 
+// todo: move to presentation
 public class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;

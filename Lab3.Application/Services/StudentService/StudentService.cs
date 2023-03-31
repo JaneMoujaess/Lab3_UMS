@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using Lab3.Application.DTOs;
 using Lab3.Application.Exceptions;
+using Lab3.Application.Services.PublisherService;
 using Lab3.Application.Services.UserIdentifierService;
 using Lab3.Domain.Models;
 using Lab3.Persistence;
@@ -13,15 +14,17 @@ using RabbitMQ.Client;
 
 namespace Lab3.Application.Services.StudentService;
 
-public class StudentService : IStudentService,IPublisher
+public class StudentService : IStudentService
 {
     private readonly UmsDbContext _dbContext;
     private readonly IUserIdentifierService _userIdentifierService;
+    private readonly IPublisherService _publisherService;
 
-    public StudentService(UmsDbContext dbContext, IUserIdentifierService userIdentifierService)
+    public StudentService(UmsDbContext dbContext, IUserIdentifierService userIdentifierService,IPublisherService publisherService)
     {
         _dbContext = dbContext;
         _userIdentifierService = userIdentifierService;
+        _publisherService = publisherService;
     }
     /*It takes a classId and checks in the database for a class given
     with the same Id. Note a class is the equivalent of a TeacherPerCourse.
@@ -75,12 +78,12 @@ public class StudentService : IStudentService,IPublisher
         var courseId = classes.CourseId;
         var teacherId = classes.TeacherId;
         
-        PublishNotification(new NotificationDto(){TeacherId = teacherId,StudentId = studentId,CourseId = courseId});
+        _publisherService.Publish("notifications",new NotificationDto(){TeacherId = teacherId,StudentId = studentId,CourseId = courseId});
 
         return "Student x enrolled successfully in course y";
     }
 
-    public void PublishNotification<T>(T notification)
+    /*public void Publish<T>(T notification)
     {
         var factory = new ConnectionFactory { HostName = "localhost" };
         var connection = factory.CreateConnection();
@@ -95,5 +98,5 @@ public class StudentService : IStudentService,IPublisher
         var body = Encoding.UTF8.GetBytes(json);
 
         channel.BasicPublish(exchange: "", routingKey: "notifications", body: body);
-    }
+    }*/
 }

@@ -1,4 +1,6 @@
 ﻿using Lab3.Application.Exceptions;
+using Lab3.Application.Services.PublisherService;
+using Lab3.Application.Services.StudentService;
 using Lab3.Application.Services.UserIdentifierService;
 using Lab3.Domain.Models;
 using Lab3.Persistence;
@@ -12,11 +14,13 @@ public class TeacherService : ITeacherService
 {
     private readonly UmsDbContext _dbContext;
     private readonly IUserIdentifierService _userIdentifierService;
+    private readonly IPublisherService _publisherService;
 
-    public TeacherService(UmsDbContext dbContext,IUserIdentifierService userIdentifierService)
+    public TeacherService(UmsDbContext dbContext,IUserIdentifierService userIdentifierService,IPublisherService publisherService)
     {
         _dbContext = dbContext;
         _userIdentifierService = userIdentifierService;
+        _publisherService = publisherService;
     }
     public async Task<long> TeachCourseHelper(long courseId)
     {
@@ -64,6 +68,8 @@ public class TeacherService : ITeacherService
         
         _dbContext.SessionTimes.Add(newSessionTime);
         await _dbContext.SaveChangesAsync();
+        
+        _publisherService.Publish("test","test");
 
         return "Session time successfully added";
     }

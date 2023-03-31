@@ -2,9 +2,11 @@ using System.Security.Claims;
 using dotenv.net;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
+using Lab3.API.Configuration;
 using Lab3.Application.Middlewares;
 using Lab3.Application.Services.AdminService;
 using Lab3.Application.Services.CourseService;
+using Lab3.Application.Services.PublisherService;
 using Lab3.Application.Services.StudentService;
 using Lab3.Application.Services.TeacherService;
 using Lab3.Application.Services.UserIdentifierService;
@@ -46,7 +48,7 @@ builder.Services.AddTransient<IStudentService, StudentService>();
 builder.Services.AddTransient<ITeacherService, TeacherService>();
 builder.Services.AddScoped<IUserIdentifierService, UserIdentifierService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
-//builder.Services.AddScoped<IMessageProducer, StudentService>();
+builder.Services.AddSingleton<IPublisherService, PublisherService>();
 
 //Odata
 static IEdmModel GetEdmModel()
@@ -73,30 +75,7 @@ FirebaseApp.Create(new AppOptions
     Credential = GoogleCredential.FromFile("./firebase-config.json")
 });
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("AdminPermission", policy =>
-        policy.RequireAssertion(context =>
-            context.User.HasClaim(c =>
-                c.Type == "roleId" && c.Value == "1"
-            )
-        )
-    );
-    options.AddPolicy("TeacherPermission", policy =>
-        policy.RequireAssertion(context =>
-            context.User.HasClaim(c =>
-                c.Type == "roleId" && c.Value == "2"
-            )
-        )
-    );
-    options.AddPolicy("StudentPermission", policy =>
-        policy.RequireAssertion(context =>
-            context.User.HasClaim(c =>
-                c.Type == "roleId" && c.Value == "3"
-            )
-        )
-    );
-});
+builder.Services.AddAuthorizationConfiguration();
 //JWT handling
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
